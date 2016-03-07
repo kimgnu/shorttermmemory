@@ -1,0 +1,27 @@
+#boundary{
+    margin:auto;
+    border:1px solid black;
+}
+
+#buttons{
+    margin:auto;
+    align:center;
+    text-align:center;
+}
+
+.num{             
+    width:33%;
+    height:33%;
+    float:left;
+    text-align:center;
+    opacity:0;  
+}
+
+#new{
+    margin:auto;
+    width:99%;
+    height:99%;
+    float:left;
+    text-align:center;
+    align:center;
+}
