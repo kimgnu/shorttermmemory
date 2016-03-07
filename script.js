@@ -11,28 +11,31 @@ $(document).ready(function() {
 
     var sqlen = 0;
     var anisize = 0;
-    initCss();
+    var States = Object.freeze({init:0, test:1, edit:2, wait:3, next:4, result:5});
+    var state = States.init;
+    var testNum = 0;
+    
+    setGui(States.next);
 
     $(window).resize(function() {
-	initCss();
+	setGui(state);
     });
     
-    $('#starttest').click(function() {
-	shufflePos();
+    $('#init-start-btn').click(function() {
 	startTest();
     });
     
-    $('#userinput').keydown(function(event) {
+    $('#edit-input').keydown(function(event) {
 	return checkIfNumber(event);
     });
     
-    $('#userinput').keyup(function(event) {
+    $('#edit-input').keyup(function(event) {
 	removeChar(event);
 	showInput();
     });
     
-    $('#submit').click(function() {
-	var str = $("input[id='userinput']").val();
+    $('#edit-submit-btn').click(function() {
+	var str = $("input[id='edit-input']").val();
 	if (str.length < 9) {
 	    alert("Please complete the sequence");
 	    return;
@@ -86,36 +89,100 @@ $(document).ready(function() {
 	} else
 	    submitAnswer();
     });
+
+    $('#next-btn').click(function() {
+	startResult();
+    });
     
     /**
     $('#answeragain').click(function() {
 	submitAnswer();
     });
-    */
     
     $('#restart').click(function() {
-	$('#animation').children().html('');
-	$('#animation').children().removeClass('currect');
-	$('#animation').children().removeClass('wrong');
+	//$('#animation').children().html('');
+	//$('#animation').children().removeClass('currect');
+	//$('#animation').children().removeClass('wrong');
 	$('#buttons').children().addClass('hide');
 	$('#buttons').children().children().addClass('hide');
 	shufflePos();
 	startTest();
     });
+    */
     
     $(document).keydown(function(event) {
 	event = event || window.event;
 	var keyID = (event.which) ? event.which : event.keyCode;
 	if (keyID == 13) {
+	    // need to be changed
 	    $('button').not('.hide').click();
 	}
     });
 
     
-    function initCss() {
+    function setGui(currentState) {
+	state = currentState;
 	sqlen = $(window).height();
 	if ($(window).width() < sqlen) sqlen = $(window).width();
-	
+
+	if (state == States.init) {
+	    $('div').not('.init').addClass('hide');
+	    $('.init').removeClass('hide');
+	    //$('.init').children().removeClass('hide');
+	    $('#init-top').css('height', sqlen/8.5);
+	    $('#init-main').css('height', sqlen*3/4);
+	    $('.init').css('font-size', sqlen/12);
+	    $('.init').css('text-align', 'center');
+	    $('#init-bottom').css('height', sqlen/9);
+	} else if (state == States.test) {
+	    $('div').not('.test').addClass('hide');
+	    $('.test').removeClass('hide');
+	    $('#test-top').css('height', sqlen/8.5);
+	    $('#test-sqr').css('height', sqlen*3/4);
+	    $('#test-sqr').css('width', sqlen*3/4);
+	    $('.num').css('font-size', sqlen/5);
+	    $('#test-bottom').css('height', sqlen/9);
+	    $('body').css('cursor', 'none');
+	} else if (state == States.edit) {
+	    $('div').not('.edit').addClass('hide');
+	    $('.edit').removeClass('hide');
+	    $('#edit-top').css('height', sqlen/9.5);
+	    anisize = $(window).width()/9;
+	    $('#edit-top').children().css('width', anisize*.95);
+	    $('#edit-top').children().css('height', sqlen/19);
+	    if (sqlen/19 < anisize) anisize = sqlen/19;
+	    $('#edit-top').children().css('float', 'left');
+	    $('#edit-top').children().css('text-align', 'center');
+	    $('#edit-top').children().css('font-size', anisize*.9);
+	    $('#edit-main').css('height', sqlen/2);
+	    $('.edit').css('font-size', sqlen/12);
+	    $('.edit').css('text-align', 'center');
+	    
+	    $('#edit-bottom').css('float', 'right');
+	    $('#edit-count').css('font-size', sqlen/5);
+	    $('#edit-count').css('padding-right', sqlen/5);
+	} else if (state == States.wait) {
+	    $('div').not('.wait').addClass('hide');
+	    $('.wait').removeClass('hide');
+	    $('#wait-top').css('height', sqlen/3);
+	    $('#wait-sqr').css('height', sqlen/3);
+	    $('#wait-sqr').css('width', sqlen/3);
+	    $('#wait-sqr').css('font-size', sqlen/3.5);
+	    $('#wait-sqr').css('text-align', 'center');
+	    $('#wait-sqr').css('align', 'center');
+	} else if (state == States.next) {
+	    $('div').not('.next').addClass('hide');
+	    $('.next').removeClass('hide');
+	    $('#next-top').css('height', sqlen/2.5);
+	    $('#next-main').css('height', sqlen/3);
+	    $('.next').css('font-size', sqlen/12);
+	    $('.next').css('text-align', 'center');
+	} else if (state == States.result) {
+	    $('div').not('.result').addClass('hide');
+	    $('.result').removeClass('hide');
+	    $('.result').css('font-size', sqlen/12);
+	}
+	/**
 	$('#animation').css('height', sqlen/9.5);
 	anisize = $(window).width()/9;
 	$('#animation').children().css('width', anisize*.95);
@@ -132,6 +199,7 @@ $(document).ready(function() {
 	$('#buttons').css('height', sqlen/10);
 	$('#buttons').children().css('font-size', sqlen/12);
 	$('#buttons').children().children().css('font-size', sqlen/12);
+*/
     }
 		  
     function checkIfNumber(event){
@@ -165,7 +233,8 @@ $(document).ready(function() {
         }
         shuffle(order);
     }
-    
+
+    /**
     function startTest() {
 	$('#buttons').children().addClass('hide');
 	$('#buttons').children().children().addClass('hide');
@@ -174,18 +243,84 @@ $(document).ready(function() {
 	count = -1;
         tid = setInterval(test, interval);
     }
-
+    */
+    
+    function startTest() {
+	shufflePos();
+	setGui(States.test);
+	count = -1;
+	tid1 = setInterval(test, interval);
+    }
+    
     function test() {
         if(count < order.length) {
             if (count != -1) $(order[count]).css('opacity', 0);
 	    $(order[++count]).css('opacity', 1);
 	} else {
-	    showEdit();
-	    $('body').css('cursor', 'pointer');
-            clearInterval(tid);
+	    startEdit();
+	    clearInterval(tid1);
         }
     }
-    	
+    
+    function startEdit() {
+	setGui(States.edit);
+	$('#edit-input').val('');
+	$('#edit-input').focus();
+	$('body').css('cursor', 'pointer');
+	
+	count = 15;
+	$('#edit-count').html(count--);
+	tid2 = setInterval(editCountdown, interval);
+    }
+    
+    function editCountdown() {
+	if (count > 0) {
+	    $('#edit-count').html(count--);
+	} else {
+	    startWait();
+	    clearInterval(tid2);
+	}
+    }
+    
+    function startWait() {
+	if (testNum >= 3) {
+	    startNext();
+	} else {
+	    testNum++;
+	    storeResult();
+	    setGui(States.wait);
+	    
+	    count = 5;
+	    $('#wait-sqr').html(count--);
+	    tid3 = setInterval(waitCountdown, interval);
+	}
+    }
+
+    function storeResult() {
+    }
+	
+    function waitCountdown() {
+	if (count > 0) {
+	    $('#wait-sqr').html(count--);
+	} else {
+	    startTest();
+	    clearInterval(tid3);
+	}
+    }
+    
+    function startNext() {
+	setGui(States.next);
+    }
+	    
+    function startResult() {
+	setGui(States.result);
+	showResult();
+    }
+
+    function showResult() {
+    }
+    
+    /**
     function showEdit() {
 	$('#sqr').addClass('hide');
 	$('#subdiv').removeClass('hide');
@@ -196,20 +331,21 @@ $(document).ready(function() {
 	$('#submit').removeClass('hide');
 	$('#userinput').focus();
     }
+    */
 
     function showInput() {
-	$('#animation').children().html('');
-	var str = $("input[id='userinput']").val();
+	var str = $("input[id='edit-input']").val();
 	for (var i = 0; i < str.length; i++)
 	    $('#1'+(i+1)).html(str.charAt(i));
     }
-    
+
+    /**
     function submitAnswer() {
 	$('body').css('cursor', 'none');
 	$('#buttons').children().addClass('hide');
 	$('#buttons').children().children().addClass('hide');
 	$('#sqr').removeClass('hide');
-	$('#animation').children().html('');
+	//$('#animation').children().html('');
 	$('#userinput').blur();
 	count = -1;
 	score = 0;
@@ -223,13 +359,13 @@ $(document).ready(function() {
 	    var currect = parseInt($(order[count]).text());
 	    var answer = inputs[count];
 	    if (currect == answer) {
-		$('#1' + (count+1)).addClass('currect');
+		//$('#1' + (count+1)).addClass('currect');
 		score++;
 	    } else {
-		$('#1' + (count+1)).addClass('wrong');
+		//$('#1' + (count+1)).addClass('wrong');
 	    }
-	    $('#0' + (count+1)).html(currect);
-	    $('#1' + (count+1)).html(answer);
+	    //$('#0' + (count+1)).html(currect);
+	    //$('#1' + (count+1)).html(answer);
 	} else {
 	    $('body').css('cursor', 'pointer');
 	    showScore();
@@ -244,4 +380,5 @@ $(document).ready(function() {
 	// $('#answeragain').removeClass('hide');
 	$('#restart').removeClass('hide');
     }
+    */
 });

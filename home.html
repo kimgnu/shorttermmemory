@@ -2,57 +2,115 @@
 <html>
   <head>
     <title>Short Term Memory Test</title>
+    <meta charset="utf-8"/>
     <link type="text/css" rel="stylesheet" href="gui.css"></link>
+    <!-- using offline jquery library file now -->
     <script type="text/javascript" src="jquery-2.2.0.min.js"></script>
   </head>
   <body>
-    <div id='animation'>
-      <div id='01'></div>
-      <div id='02'></div>
-      <div id='03'></div>
-      <div id='04'></div>
-      <div id='05'></div>
-      <div id='06'></div>
-      <div id='07'></div>
-      <div id='08'></div>
-      <div id='09'></div>
-
-      <div id='11'></div>
-      <div id='12'></div>
-      <div id='13'></div>
-      <div id='14'></div>
-      <div id='15'></div>
-      <div id='16'></div>
-      <div id='17'></div>
-      <div id='18'></div>
-      <div id='19'></div>
-    </div>
-    <div class='hide' id='sqr'>
-      <div class='num' id='a'></div>
-      <div class='num' id='b'></div>
-      <div class='num' id='c'></div>
-
-      <div class='num' id='d'></div>
-      <div class='num' id='e'></div>
-      <div class='num' id='f'></div>
+    <!--
+    <div id="animation">
       
-      <div class='num' id='g'></div>
-      <div class='num' id='h'></div>
-      <div class='num' id='i'></div>
+</div-->
+    <div class="init">
+      <div class="init" id="init-top"></div>
+      <div class="init" id="init-main">
+	<p class="init" id="init-text">Welcome to<br/>Short Term Memory Test</p>
+	<button class="init" id="init-start-btn">Start Test</button>
+      </div>
+      <div id="init-bottom"></div>
     </div>
-    <div id='buttons'>
-
-      <p id='starttext'>Welcome to<br/>Short Term Memory Test</p>
-      <button id='starttest'>Start Test</button>
-
-      <p class='hide' id='submittext'>Type the sequence of 9 numbers<br/> without any separator<br/>eg. 135792468</p>
-      <input type='text' class='hide' id='userinput' maxlength='9' size='9' style='ime-mode:disabled;'/>
-      <div id='subdiv'><button class='hide' id='submit'>Submit</button></div>
-
-      <p class='hide' id='scoretext'></p>
-      <!--button class='hide' id='answeragain'>Show Again</button-->
-      <button class='hide' id='restart'>Start New Test</button>
+    <div class="test">
+      <div class="test" id="test-top"></div>
+      <div class="test sqr" id="test-sqr">
+	<div class="test num" id="a"></div>
+	<div class="test num" id="b"></div>
+	<div class="test num" id="c"></div>
+	
+	<div class="test num" id="d"></div>
+	<div class="test num" id="e"></div>
+	<div class="test num" id="f"></div>
+	
+	<div class="test num" id="g"></div>
+	<div class="test num" id="h"></div>
+	<div class="test num" id="i"></div>
+      </div>
+      <div class="test" id="test-bottom"></div>
     </div>
+    <div class="edit">
+      <div class="edit" id="edit-top">
+	<div class="edit" id="01"></div>
+	<div class="edit" id="02"></div>
+	<div class="edit" id="03"></div>
+	<div class="edit" id="04"></div>
+	<div class="edit" id="05"></div>
+	<div class="edit" id="06"></div>
+	<div class="edit" id="07"></div>
+	<div class="edit" id="08"></div>
+	<div class="edit" id="09"></div>
+
+	<div class="edit" id="11"></div>
+	<div class="edit" id="12"></div>
+	<div class="edit" id="13"></div>
+	<div class="edit" id="14"></div>
+	<div class="edit" id="15"></div>
+	<div class="edit" id="16"></div>
+	<div class="edit" id="17"></div>
+	<div class="edit" id="18"></div>
+	<div class="edit" id="19"></div>
+      </div>
+      <div class="edit" id="edit-main">
+	<p class="edit" id="edit-text">Type the sequence of 9 numbers<br/> without any separator<br/>eg. 135792468</p>
+	<input type="text" class="edit" id="edit-input" maxlength="9" size="9" style="ime-mode:disabled;"/>
+      </div>
+      <div class="edit" id="edit-bottom">
+	<!--button class="edit" id="edit-submit-btn">Submit</button-->
+	<div class="edit" id="edit-count"></div>
+      </div>
+    </div>
+    <div class="wait">
+      <div class="wait" id="wait-top"></div>
+      <div class="wait sqr" id="wait-sqr"></div>
+      <div class="wait" id="wait-bottom"></div>
+    </div>
+    <div class="next">
+      <div class="next" id="next-top"></div>
+      <div class="next" id="next-main">
+	<button class="next" id="next-btn">See Results</button>
+      </div>
+      <div class="next" id="next-bottom"></div>
+    </div>
+    <div class="result">
+      <div class="result part" id="result-top-left">
+	<div class="result title">Test 1</div>
+	<div class="result sequence">1 2 3 4 5 6 7 8 9</div>
+	<div class="result answer">9 8 7 6 5 4 3 2 1</div>
+	<div class="result score">Score 1/9</div>
+      </div>
+      <div class="result part" id="result-top-right">
+	<div class="result title">Test 2</div>
+	<div class="result sequence">1 2 3 4 5 6 7 8 9</div>
+	<div class="result answer">9 8 7 6 5 4 3 2 1</div>
+	<div class="result score">Score 2/9</div>
+      </div>
+      <div class="result part" id="result-bottom-left">
+	<div class="result title">Test 3</div>
+	<div class="result sequence">1 2 3 4 5 6 7 8 9</div>
+	<div class="result answer">9 8 7 6 5 4 3 2 1</div>
+	<div class="result score">Score 3/9</div>
+      </div>
+      <div class="result part" id="result-bottom-right">
+	<div class="result title">Test 4</div>
+	<div class="result sequence">1 2 3 4 5 6 7 8 9</div>
+	<div class="result answer">9 8 7 6 5 4 3 2 1</div>
+	<div class="result score">Score 4/9</div>
+      </div>
+    </div>
+    <!--div id="buttons">
+      <p class="hide" id="scoretext"></p>
+      <!--button class="hide" id="answeragain">Show Again</button-->
+      <!--button class="hide" id="restart">Start New Test</button>
+    </div-->
     <script type="text/javascript" src="script.js"></script>
   </body>
 </html>

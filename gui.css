@@ -1,32 +1,61 @@
-#sqr{
-    margin:auto;
-    border:1px solid black;
+.sqr{
+    margin: auto;
+    border: 1px solid black;
 }
 
+/**
 #buttons{
     margin:auto;
     align:center;
     text-align:center;
 }
+*/
 
 .num{             
-    width:33%;
-    height:33%;
-    float:left;
-    text-align:center;
-    opacity:0;  
+    width: 33%;
+    height: 33%;
+    float: left;
+    text-align: center;
+    opacity: 0;  
 }
 
 .hide{
-    display:none;
+    display: none;
 }
 
 .currect{
-    color:green;
+    color: green;
 }
 
 .wrong{
     color:red;
+}
+
+.part {
+    width: 48%;
+    height: 48%;
+    float: left;
+    text-align: center;
+}
+
+.title {
+    width: 98%;
+    height: 22%;
+}
+
+.sequence {
+    width: 98%;
+    height: 22%;
+}
+
+.answer {
+    width: 98%;
+    height: 22%;
+}
+
+.score {
+    width: 98%;
+    height: 22%;
 }
 
 /**
