@@ -1,4 +1,4 @@
-#boundary{
+#sqr{
     margin:auto;
     border:1px solid black;
 }
@@ -17,6 +17,19 @@
     opacity:0;  
 }
 
+.hide{
+    display:none;
+}
+
+.currect{
+    color:green;
+}
+
+.wrong{
+    color:red;
+}
+
+/**
 #new{
     margin:auto;
     width:99%;
@@ -25,3 +38,4 @@
     text-align:center;
     align:center;
 }
+*/
