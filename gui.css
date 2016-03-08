@@ -1,4 +1,9 @@
-.sqr{
+* {
+    text-align: center;
+    align: center;
+}
+
+.sqr {
     margin: auto;
     border: 1px solid black;
 }
@@ -15,19 +20,23 @@
     width: 33%;
     height: 33%;
     float: left;
-    text-align: center;
+    //text-align: center;
     opacity: 0;  
 }
 
-.hide{
+.hide {
     display: none;
 }
 
-.currect{
+.focus {
+    border: 1px solid orange;
+}
+
+.currect {
     color: green;
 }
 
-.wrong{
+.wrong {
     color:red;
 }
 
@@ -35,27 +44,28 @@
     width: 48%;
     height: 48%;
     float: left;
-    text-align: center;
+    //text-align: center;
 }
 
 .title {
+    text-align: left;
     width: 98%;
-    height: 22%;
+    height: 24%;
 }
 
-.sequence {
+.quiz {
     width: 98%;
-    height: 22%;
+    height: 24%;
 }
 
 .answer {
     width: 98%;
-    height: 22%;
+    height: 24%;
 }
 
 .score {
     width: 98%;
-    height: 22%;
+    height: 24%;
 }
 
 /**
