@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    var onesec = 300;   // 1sec
-    var interval = 0;
+    var onesec = 1000;   // 1sec
+    var interval = 1000;
     var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];  // all possible numbers
     var order = ['#a', '#b', '#c', 
 		 '#d', '#e', '#f', 
@@ -12,13 +12,27 @@ $(document).ready(function() {
     var testNum = 0;
     var results = [null, null, null, null];
 
+/**
+    results = [{quiz: '123456789', answer: '123458769'},
+	       {quiz: '234567891', answer: '234587691'},
+	       {quiz: '345678912', answer: '345876912'},
+	       {quiz: '456789123', answer: '458769123'}];
+*/
     setGui(States.init);
 
+/**
+    for (; testNum < 4; testNum++) {
+	showResult();
+    }
+*/
+
+    
     $(window).resize(function() {
 	setGui(state);
     });
     
     $('#init-start-btn').click(function() {
+	$('body').css('cursor', 'none');
 	startTest();
     });
 
@@ -34,6 +48,11 @@ $(document).ready(function() {
 
     $('#next-btn').click(function() {
 	startResult();
+    });
+
+    $('#result-main-btn').click(function() {
+	if (confirm("Did you record the data?\nYou will go back to the main page."))
+	    location.reload(true);
     });
 
     $(document).keydown(function(event) {
@@ -58,10 +77,7 @@ $(document).ready(function() {
 	    // need to be changed
 	    if (state == States.init) $('#init-start-btn').click();
 	    else if (state == States.next) $('#next-btn').click();
-	    else if(state == States.result) {
-		if (confirm("Did you record the data?\nYou will go back to the main page."))
-		    location.reload(true);
-	    }
+	    else if(state == States.result) $('#result-main-btn').click();
 	}
     });
 		  
@@ -122,6 +138,7 @@ $(document).ready(function() {
             if (count != -1) $(order[count]).css('opacity', 0);
 	    $(order[++count]).css('opacity', 1);
 	} else {
+	    $('body').css('cursor', 'pointer');
 	    startEdit();
 	    clearInterval(tid1);
         }
@@ -129,20 +146,22 @@ $(document).ready(function() {
     
     function startEdit() {
 	setGui(States.edit);
+	$('.dash').css('opacity', 0);
 	for (var i = 0; i < 9; i++)
 	    $('#1'+(i+1)).html('');
 	$('#edit-input').val('');
 	$('#edit-input').focus();
-	$('body').css('cursor', 'pointer');
-	
+		
 	count = 15;
 	$('#edit-count').html(count--);
 	tid2 = setInterval(editCountdown, onesec);
     }
     
     function editCountdown() {
-	if (count > 0) {
+	if (count > 5) {
 	    $('#edit-count').html(count--);
+	} else if (count > 0) {
+	    $('#edit-count').html('<span class="wrong">' + count-- + '</span>');	    
 	} else {
 	    startWait();
 	    clearInterval(tid2);
@@ -150,11 +169,14 @@ $(document).ready(function() {
     }
     
     function startWait() {
+	$('body').focus();
 	storeResult();
 	testNum++;
 	if (testNum >= 4) {
+	    $('body').css('cursor', 'pointer');
 	    startNext();
 	} else {
+	    $('body').css('cursor', 'none');
 	    setGui(States.wait);
 	    
 	    count = 5;
@@ -168,8 +190,8 @@ $(document).ready(function() {
 	for (var i = 0; i < order.length; i++)
 	    quiz = quiz + $(order[i]).text();
 	var answer = $("input[id='edit-input']").val();
-	for (var i = 0; i < (quiz.length - answer.length); i++)
-	    answer = answer + " ";
+	//for (var i = 0; i < (quiz.length - answer.length); i++)
+	//    answer = answer + " ";
 	if (results[testNum] != null) {
 	    alert("results[" + testNum + "] is not null!");
 	} else {
@@ -185,6 +207,7 @@ $(document).ready(function() {
 	if (count > 0) {
 	    $('#wait-sqr').html(count--);
 	} else {
+	    $('body').css('cursor', 'none');
 	    startTest();
 	    clearInterval(tid3);
 	}
@@ -201,13 +224,34 @@ $(document).ready(function() {
 
     function showResult() {
 	for (var i = 0; i < 4; i++) {
-	    var parent = '.part:nth-child('+ (i-1) +')';
-	    $(parent+' .quiz').html(results[i].quiz);
-	    $(parent+' .answer').html(results[i].answer);
+	    var parent = '.part:nth-child('+ (i+1) +')';
+	    //$(parent+' .quiz').html(results[i].quiz);
+	    //$(parent+' .answer').html(results[i].answer);
+	    var qval = results[i].quiz;
+	    var aval = results[i].answer;
+	    var qstr = 'Q: ';
+	    var astr = 'A: ';
 	    var score = 0;
-	    for (var j = 0; j < results[i].quiz.length; j++)
-		if (results[i].quiz.charAt(j) == results[i].answer.charAt(j))
+	    for (var j = 0; j < qval.length; j++) {
+		var q = qval.charAt(j);
+		if (j > 0) qstr = qstr + '-';
+		qstr = qstr + q;
+
+		if (j >= aval.length) {
+		    console.log('different length in test' + (i+1) + ': ' + qval.length + ',' + aval.length);
+		    continue;
+		}
+		var a = aval.charAt(j);
+		if (j > 0) astr = astr + '-';		    
+		if (q == a) {
+		    astr = astr + '<span class="currect">' + a + '</span>';			
 		    score++;
+		} else {
+		    astr = astr + '<span class="wrong">' + a + '</span>';
+		}
+	    }
+	    $(parent+' .quiz').html(qstr);
+	    $(parent+' .answer').html(astr);
 	    $(parent+' .score').html("Score: " + score + "/9");
 	}
     }
@@ -216,14 +260,15 @@ $(document).ready(function() {
 	for (var i = 0; i < 9; i++)
 	    $('#1'+(i+1)).html('');
 	var str = $("input[id='edit-input']").val();
+	if (str.length) $('.dash').css('opacity', 1);
+	else $('.dash').css('opacity', 0);
 	for (var i = 0; i < str.length; i++)
 	    $('#1'+(i+1)).html(str.charAt(i));
     }
 
     function setGui(currentState) {
 	state = currentState;
-	sqlen = $(window).height();
-	if ($(window).width() < sqlen) sqlen = $(window).width();
+	sqlen = Math.min($(window).height(), $(window).width());
 
 	if (state == States.init) {
 	    $('div').not('.init').addClass('hide');
@@ -233,16 +278,19 @@ $(document).ready(function() {
 	    $('.init').css('font-size', sqlen/12);
 	    //$('.init').css('text-align', 'center');
 	    $('#init-bottom').css('height', sqlen/9);
-	} else if (state == States.test) {
-	    $('div').not('.test').addClass('hide');
+	}
+	else if (state == States.test) {
 	    $('.test').removeClass('hide');
+	    $('div').not('.test').addClass('hide');
+	    
+	    
 	    $('#test-top').css('height', sqlen/8.5);
 	    $('#test-sqr').css('height', sqlen*3/4);
 	    $('#test-sqr').css('width', sqlen*3/4);
 	    $('.num').css('font-size', sqlen/5);
-	    $('#test-bottom').css('height', sqlen/9);
-	    $('body').css('cursor', 'none');
-	} else if (state == States.edit) {
+	    $('#test-bottom').css('height', sqlen/12);
+	}
+	else if (state == States.edit) {
 	    $('div').not('.edit').addClass('hide');
 	    $('.edit').removeClass('hide');
 	    /**
@@ -274,7 +322,7 @@ $(document).ready(function() {
 	    $('#edit-top').css('height', sqlen/8);
 	    $('#edit-main').css('height', sqlen/2);
 	    $('.edit').css('font-size', sqlen/12);
-	    $('#edit-display').css('height', sqlen/8);
+	    $('#edit-display').css('height', sqlen/4);
 	    $('#edit-display').children().css('width', $(window).width()/17.5);
 	    $('#edit-display').children().css('height', sqlen/19);
 	    $('#edit-display').css('align', 'center');
@@ -284,27 +332,40 @@ $(document).ready(function() {
 	    $('#edit-bottom').css('float', 'right');
 	    $('#edit-count').css('font-size', sqlen/5);
 	    $('#edit-count').css('padding-right', sqlen/5);
-	} else if (state == States.wait) {
+	    
+	}
+	else if (state == States.wait) {
 	    $('div').not('.wait').addClass('hide');
 	    $('.wait').removeClass('hide');
-	    $('#wait-top').css('height', sqlen/3);
-	    $('#wait-sqr').css('height', sqlen/3);
-	    $('#wait-sqr').css('width', sqlen/3);
+	    $('#wait-top').css('height', $(window).height()/3);
+	    $('#wait-sqr').css('height', $(window).height()/3);
+	    $('#wait-sqr').css('width', $(window).width()*0.9);
+	    $('#wait-bottom').css('height', $(window).height()/4);
 	    $('.wait').css('font-size', sqlen/3.5);
 	    $('.wait').css('margin', 'auto');
+	    
 	    //$('.wait').css('text-align', 'center');
 	    //$('.wait').css('align', 'center');
-	} else if (state == States.next) {
+	}
+	else if (state == States.next) {
 	    $('div').not('.next').addClass('hide');
 	    $('.next').removeClass('hide');
 	    $('#next-top').css('height', sqlen/2.5);
 	    $('#next-main').css('height', sqlen/3);
 	    $('.next').css('font-size', sqlen/12);
+
 	    //$('.next').css('text-align', 'center');
 	} else if (state == States.result) {
 	    $('div').not('.result').addClass('hide');
 	    $('.result').removeClass('hide');
-	    $('.result').css('font-size', sqlen/12);
+	    $('.result').css('font-size', $(window).width()/30);
+	    $('.part').css('height', sqlen/2.5);
+	    //$('.title').css('padding-left', $(window).width()/22);
+	    $('.title').css('padding-top', $(window).width()/180);
+	    //$('.quiz, .answer').css('padding-left', $(window).width()/15);
+	    $('#result-bottom').css('height', sqlen/15);
+	    $('#result-main-btn').css('margin-top', sqlen/20);
+
 	}
      }
     

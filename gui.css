@@ -8,6 +8,17 @@
     border: 1px solid black;
 }
 
+input[type=text]::-ms-clear {
+    display: none;
+    width : 0;
+    height: 0;
+}
+
+input[type=text]::-ms-reveal {
+    display: none;
+    width : 0;
+    height: 0;
+}
 /**
 #buttons{
     margin:auto;
@@ -28,8 +39,14 @@
     display: none;
 }
 
+/**
 .focus {
     border: 1px solid orange;
+}
+*/
+
+.dash {
+    opacity: 0;
 }
 
 .currect {
@@ -41,31 +58,30 @@
 }
 
 .part {
-    width: 48%;
+    width: 49.6%;
     height: 48%;
     float: left;
+    margin: auto;
+    border: solid 1px orange;
     //text-align: center;
+}
+
+.title, .quiz, .answer, .score {
+    width: 100%;
+    height: 21%;
+    padding: 1%;
 }
 
 .title {
     text-align: left;
-    width: 98%;
-    height: 24%;
+    padding-left: 5%;
+    width: 95%;
 }
 
-.quiz {
-    width: 98%;
-    height: 24%;
-}
-
-.answer {
-    width: 98%;
-    height: 24%;
-}
-
-.score {
-    width: 98%;
-    height: 24%;
+.quiz, .answer {
+    text-align: left;
+    padding-left: 12%;
+    width: 88%;
 }
 
 /**
