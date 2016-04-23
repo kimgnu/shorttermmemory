@@ -8,72 +8,57 @@
     <script type="text/javascript" src="jquery-2.2.0.min.js"></script>
   </head>
   <body>
-    <!--
-    <div id="animation">
-      
-</div-->
     <div class="init">
       <div class="init" id="init-top"></div>
       <div class="init" id="init-main">
-	<p class="init" id="init-text">Welcome to<br/>Short Term Memory Test</p>
-	<button class="init" id="init-start-btn">Start Test</button>
+        <p class="init" id="init-text">Welcome to<br/>Short Term Memory Test</p>
+        <button class="init" id="init-start-btn">Start Test</button>
       </div>
       <div id="init-bottom"></div>
     </div>
     <div class="test hide">
       <div class="test" id="test-top"></div>
       <div class="test sqr" id="test-sqr">
-	<div class="test num" id="a"></div>
-	<div class="test num" id="b"></div>
-	<div class="test num" id="c"></div>
-	
-	<div class="test num" id="d"></div>
-	<div class="test num" id="e"></div>
-	<div class="test num" id="f"></div>
-	
-	<div class="test num" id="g"></div>
-	<div class="test num" id="h"></div>
-	<div class="test num" id="i"></div>
+        <div class="test num" id="a"></div>
+        <div class="test num" id="b"></div>
+        <div class="test num" id="c"></div>
+        
+        <div class="test num" id="d"></div>
+        <div class="test num" id="e"></div>
+        <div class="test num" id="f"></div>
+        
+        <div class="test num" id="g"></div>
+        <div class="test num" id="h"></div>
+        <div class="test num" id="i"></div>
       </div>
       <div class="test" id="test-bottom"></div>
     </div>
     <div class="edit hide">
       <div class="edit" id="edit-top"> </div>
-      <!--div class="edit" id="01"></div>
-	  <div class="edit" id="02"></div>
-	  <div class="edit" id="03"></div>
-	  <div class="edit" id="04"></div>
-	  <div class="edit" id="05"></div>
-	  <div class="edit" id="06"></div>
-	  <div class="edit" id="07"></div>
-	  <div class="edit" id="08"></div>
-	  <div class="edit" id="09"></div-->
       <div class="edit" id="edit-main">
-	<div class="edit" id="edit-display">
-	  <div class="edit" id="11"></div>
-	  <div class="edit dash">-</div>
-	  <div class="edit" id="12"></div>
-	  <div class="edit dash">-</div>
-	  <div class="edit" id="13"></div>
-	  <div class="edit dash">-</div>
-	  <div class="edit" id="14"></div>
-	  <div class="edit dash">-</div>
-	  <div class="edit" id="15"></div>
-	  <div class="edit dash">-</div>
-	  <div class="edit" id="16"></div>
-	  <div class="edit dash">-</div>
-	  <div class="edit" id="17"></div>
-	  <div class="edit dash">-</div>
-	  <div class="edit" id="18"></div>
-	  <div class="edit dash">-</div>
-	  <div class="edit" id="19"></div>
-	</div>
-	<!--p class="edit" id="edit-text">Type the sequence of 9 numbers<br/> without any separator<br/>eg. 135792468</p-->
-	<input type="text" class="edit" id="edit-input" maxlength="9" size="9" style="ime-mode:disabled;"/>
+        <div class="edit" id="edit-display">
+          <div class="edit" id="11"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="12"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="13"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="14"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="15"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="16"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="17"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="18"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="19"></div>
+        </div>
+        <input type="text" class="edit" id="edit-input" maxlength="9" size="9" style="ime-mode:disabled;"/>
       </div>
       <div class="edit" id="edit-bottom">
-	<!--button class="edit" id="edit-submit-btn">Submit</button-->
-	<div class="edit" id="edit-count"></div>
+        <div class="edit" id="edit-count"></div>
       </div>
     </div>
     <div class="wait hide">
@@ -84,37 +69,37 @@
     <div class="next hide">
       <div class="next" id="next-top"></div>
       <div class="next" id="next-main">
-	<button class="next" id="next-btn">See Results</button>
+        <button class="next" id="next-btn">See Results</button>
       </div>
       <div class="next" id="next-bottom"></div>
     </div>
     <div class="result hide">
       <div class="result part" id="result-top-left">
-	<div class="result title">Test1</div>
-	<div class="result quiz"></div>
-	<div class="result answer"></div>
-	<div class="result score"></div>
+        <div class="result title">Test1</div>
+        <div class="result quiz"></div>
+        <div class="result answer"></div>
+        <div class="result score"></div>
       </div>
       <div class="result part" id="result-top-right">
-	<div class="result title">Test 2</div>
-	<div class="result quiz"></div>
-	<div class="result answer"></div>
-	<div class="result score"></div>
+        <div class="result title">Test 2</div>
+        <div class="result quiz"></div>
+        <div class="result answer"></div>
+        <div class="result score"></div>
       </div>
       <div class="result part" id="result-bottom-left">
-	<div class="result title">Test 3</div>
-	<div class="result quiz"></div>
-	<div class="result answer"></div>
-	<div class="result score"></div>
+        <div class="result title">Test 3</div>
+        <div class="result quiz"></div>
+        <div class="result answer"></div>
+        <div class="result score"></div>
       </div>
       <div class="result part" id="result-bottom-right">
-	<div class="result title">Test 4</div>
-	<div class="result quiz"></div>
-	<div class="result answer"></div>
-	<div class="result score"></div>
+        <div class="result title">Test 4</div>
+        <div class="result quiz"></div>
+        <div class="result answer"></div>
+        <div class="result score"></div>
       </div>
       <div class="result" id="result-bottom">
-	<button class="result" id="result-main-btn">Go To Main</button>
+        <button class="result" id="result-main-btn">Go To Main</button>
       </div>
     </div>
     <script type="text/javascript" src="script.js"></script>

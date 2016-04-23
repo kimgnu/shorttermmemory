@@ -19,31 +19,17 @@ input[type=text]::-ms-reveal {
     width : 0;
     height: 0;
 }
-/**
-#buttons{
-    margin:auto;
-    align:center;
-    text-align:center;
-}
-*/
 
 .num{             
     width: 33%;
     height: 33%;
     float: left;
-    //text-align: center;
     opacity: 0;  
 }
 
 .hide {
     display: none;
 }
-
-/**
-.focus {
-    border: 1px solid orange;
-}
-*/
 
 .dash {
     opacity: 0;
@@ -63,7 +49,6 @@ input[type=text]::-ms-reveal {
     float: left;
     margin: auto;
     border: solid 1px orange;
-    //text-align: center;
 }
 
 .title, .quiz, .answer, .score {
@@ -83,14 +68,3 @@ input[type=text]::-ms-reveal {
     padding-left: 12%;
     width: 88%;
 }
-
-/**
-#new{
-    margin:auto;
-    width:99%;
-    height:99%;
-    float:left;
-    text-align:center;
-    align:center;
-}
-*/

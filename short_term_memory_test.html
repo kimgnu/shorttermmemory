@@ -1,3 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Short Term Memory Test</title>
+    <meta charset="utf-8"/>
+    <style>
+* {
+    text-align: center;
+    align: center;
+}
+
+.sqr {
+    margin: auto;
+    border: 1px solid black;
+}
+
+input[type=text]::-ms-clear {
+    display: none;
+    width : 0;
+    height: 0;
+}
+
+input[type=text]::-ms-reveal {
+    display: none;
+    width : 0;
+    height: 0;
+}
+
+.num{             
+    width: 33%;
+    height: 33%;
+    float: left;
+    opacity: 0;  
+}
+
+.hide {
+    display: none;
+}
+
+.dash {
+    opacity: 0;
+}
+
+.currect {
+    color: green;
+}
+
+.wrong {
+    color:red;
+}
+
+.part {
+    width: 49.6%;
+    height: 48%;
+    float: left;
+    margin: auto;
+    border: solid 1px orange;
+}
+
+.title, .quiz, .answer, .score {
+    width: 100%;
+    height: 21%;
+    padding: 1%;
+}
+
+.title {
+    text-align: left;
+    padding-left: 5%;
+    width: 95%;
+}
+
+.quiz, .answer {
+    text-align: left;
+    padding-left: 12%;
+    width: 88%;
+}
+
+    </style>
+    <!-- using offline jquery library file now -->
+    <script type="text/javascript" src="jquery-2.2.0.min.js"></script>
+  </head>
+  <body>
+    <div class="init">
+      <div class="init" id="init-top"></div>
+      <div class="init" id="init-main">
+        <p class="init" id="init-text">Welcome to<br/>Short Term Memory Test</p>
+        <button class="init" id="init-start-btn">Start Test</button>
+      </div>
+      <div id="init-bottom"></div>
+    </div>
+    <div class="test hide">
+      <div class="test" id="test-top"></div>
+      <div class="test sqr" id="test-sqr">
+        <div class="test num" id="a"></div>
+        <div class="test num" id="b"></div>
+        <div class="test num" id="c"></div>
+        
+        <div class="test num" id="d"></div>
+        <div class="test num" id="e"></div>
+        <div class="test num" id="f"></div>
+        
+        <div class="test num" id="g"></div>
+        <div class="test num" id="h"></div>
+        <div class="test num" id="i"></div>
+      </div>
+      <div class="test" id="test-bottom"></div>
+    </div>
+    <div class="edit hide">
+      <div class="edit" id="edit-top"> </div>
+      <div class="edit" id="edit-main">
+        <div class="edit" id="edit-display">
+          <div class="edit" id="11"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="12"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="13"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="14"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="15"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="16"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="17"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="18"></div>
+          <div class="edit dash">-</div>
+          <div class="edit" id="19"></div>
+        </div>
+        <input type="text" class="edit" id="edit-input" maxlength="9" size="9" style="ime-mode:disabled;"/>
+      </div>
+      <div class="edit" id="edit-bottom">
+        <div class="edit" id="edit-count"></div>
+      </div>
+    </div>
+    <div class="wait hide">
+      <div class="wait" id="wait-top"></div>
+      <div class="wait" id="wait-sqr"></div>
+      <div class="wait" id="wait-bottom"></div>
+    </div>
+    <div class="next hide">
+      <div class="next" id="next-top"></div>
+      <div class="next" id="next-main">
+        <button class="next" id="next-btn">See Results</button>
+      </div>
+      <div class="next" id="next-bottom"></div>
+    </div>
+    <div class="result hide">
+      <div class="result part" id="result-top-left">
+        <div class="result title">Test1</div>
+        <div class="result quiz"></div>
+        <div class="result answer"></div>
+        <div class="result score"></div>
+      </div>
+      <div class="result part" id="result-top-right">
+        <div class="result title">Test 2</div>
+        <div class="result quiz"></div>
+        <div class="result answer"></div>
+        <div class="result score"></div>
+      </div>
+      <div class="result part" id="result-bottom-left">
+        <div class="result title">Test 3</div>
+        <div class="result quiz"></div>
+        <div class="result answer"></div>
+        <div class="result score"></div>
+      </div>
+      <div class="result part" id="result-bottom-right">
+        <div class="result title">Test 4</div>
+        <div class="result quiz"></div>
+        <div class="result answer"></div>
+        <div class="result score"></div>
+      </div>
+      <div class="result" id="result-bottom">
+        <button class="result" id="result-main-btn">Go To Main</button>
+      </div>
+    </div>
+    <script type="text/javascript" src="script.js">
+      
 $(document).ready(function() {
     var onesec = 1000;                       // 1 second in millisec
     var interval = 1000;
@@ -329,3 +507,7 @@ $(document).ready(function() {
         }
      }
 });
+			    
+    </script>
+  </body>
+</html>
